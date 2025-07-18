@@ -1,0 +1,25 @@
+dockerfile_content = """
+# Use official Python image as base
+FROM python:3.9-slim
+
+# Set working directory inside container
+WORKDIR /app
+
+# Copy requirements and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy app source code
+COPY . .
+
+# Expose port (if using a web app)
+EXPOSE 8501
+
+# Run the app (change command if using Flask/Streamlit etc)
+CMD ["streamlit", "run", "app.py"]
+"""
+
+with open('Dockerfile', 'w') as f:
+    f.write(dockerfile_content)
+
+print("Dockerfile created!")
